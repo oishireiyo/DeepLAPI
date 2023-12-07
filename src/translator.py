@@ -107,7 +107,7 @@ class DeepLTranslator():
 
 if __name__ == '__main__':
   translator = DeepLTranslator()
-  translator.create_glossary_with_csv(csvfile='./sample_glossary.csv', glossary_name='hogehoge1', source_lang='EN', target_lang='JA')
+  translator.create_glossary_with_csv(csvfile='./../glossary/sample_glossary.csv', glossary_name='hogehoge1', source_lang='EN', target_lang='JA')
   result = translator.translate(
     text='In this image, there are three people on what appears to be a set of a Japanese variety show.',
     glossary_name='hogehoge1',
