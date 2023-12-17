@@ -40,6 +40,10 @@ class DeepLTranslator():
     self.translator = deepl.Translator(self.DEEPL_API_KEY)
     self.glossaries = {}
 
+  def set_api_key(self, api_key: str) -> bool:
+    self.translator = deepl.Translator(api_key)
+    return True
+
   def get_available_source_languages(self) -> None:
     for language in self.translator.get_source_languages():
       logger.info(f'{language.name}: {language.code}')
