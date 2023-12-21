@@ -12,10 +12,6 @@ stream_handler.setFormatter(handler_format)
 logger.addHandler(stream_handler)
 
 def CheckAPIKeyValid(api_key: str):
-  logger.info(api_key)
-  _translator = deepl.Translator(api_key)
-  _result = _translator.translate_text('This is a test.', source_lang='EN', target_lang='JA')
-  logger.debug(_result)
   try:
     logger.info(api_key)
     _translator = deepl.Translator(api_key)
