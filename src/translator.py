@@ -1,4 +1,5 @@
 import os
+import sys
 import deepl
 from typing import Union
 
@@ -11,6 +12,10 @@ stream_handler.setLevel(logging.INFO)
 handler_format = logging.Formatter('%(asctime)s : [%(name)s - %(lineno)d] %(levelname)-8s - %(message)s')
 stream_handler.setFormatter(handler_format)
 logger.addHandler(stream_handler)
+
+# Handmade module
+sys.path.append(os.path.dirname(os.path.abspath(__file__)) + '/../utils/')
+from checkDeepLAPIKeyValid import CheckAPIKeyValid
 
 '''
 以下はDeepL Python Library (https://github.com/DeepLcom/deepl-python)のREADME.mdの一部を翻訳したもの。
@@ -41,8 +46,11 @@ class DeepLTranslator():
     self.glossaries = {}
 
   def set_api_key(self, api_key: str) -> bool:
-    self.translator = deepl.Translator(api_key)
-    return True
+    if CheckAPIKeyValid(api_key=api_key):
+      self.translator = deepl.Translator(api_key)
+      return True
+    else:
+      return False
 
   def get_available_source_languages(self) -> None:
     for language in self.translator.get_source_languages():
