@@ -13,10 +13,8 @@ logger.addHandler(stream_handler)
 
 def CheckAPIKeyValid(api_key: str):
   try:
-    logger.info(api_key)
     _translator = deepl.Translator(api_key)
-    _result = _translator.translate_text('This is a test.', source_lang='EN', target_lang='JA')
-    logger.debug(_result)
+    _ = _translator.translate_text('This is a test.', source_lang='EN', target_lang='JA')
   except Exception as e:
     logger.error(e)
     return False
