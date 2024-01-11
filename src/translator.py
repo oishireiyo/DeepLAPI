@@ -112,10 +112,14 @@ class DeepLTranslator():
       self.delete_glossary(glossary_name=key)
 
   def translate(self, text: str, glossary_name: Union[str, None]=None, source_lang: str='EN', target_lang: str='JA', split_sentences: str='1') -> str:
-    results = self.translator.translate_text(
-      text, source_lang=source_lang, target_lang=target_lang, split_sentences=split_sentences,
-      glossary=self.glossaries[glossary_name] if glossary_name is not None else None)
-    return results.text
+    try:
+      results = self.translator.translate_text(
+        text, source_lang=source_lang, target_lang=target_lang, split_sentences=split_sentences,
+        glossary=self.glossaries[glossary_name] if glossary_name is not None else None)
+      return results.text
+    except Exception as e:
+      logger.warning(e)
+      return text
 
 if __name__ == '__main__':
   translator = DeepLTranslator()
